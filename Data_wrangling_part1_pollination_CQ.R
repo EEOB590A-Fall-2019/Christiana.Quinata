@@ -9,11 +9,17 @@ library(readxl)
 #2) Read in data
 arthropods <- read_excel("Data_wrangling_day1_pollination.xlsx")
 #rename columns. Leave insect families with capital letters, but make all other columns lowercase. Remove any spaces. Change "location" to "site". Change "tract" to "transect". 
+names(arthropods) <- c ("island", "site", "transect", "top color - bowl color", "Diptera", "Hemiptera", "Coleoptera", "Formicidae", "Apoidea", "Crabronidae", "Lepidoptera", "Blattodea", "Araneae", "Isoptera", "partial", "Trichoptera", "other")
 
+labels(arthropods)
 #4) Add missing data. Note that the people who entered the data did not drag down the island or location column to fill every row. 
-
+arthropods<- data.frame(island = 1:243, island = c(Guam, rep(NA, 243))
+arthropods %>% fill(island)
+arthropods %>% fill(island, site)                                               
+                                               
 #5) Separate "Top color - Bowl color" into two different columns, with the first letter for the top color and the second letter for the bowl color. We do not need to save the original column. 
-
+arthropods <- data.frame (attr=c, )
+arthropods %>% seperate(arthropods, into c = ("top color", "bowl color"))
 #6) Use the complete function to see if we have data for all 3 transects at each location. Do not overwrite the poll dataframe when you do this. 
 
 #which transects appear to be missing, and why? 
