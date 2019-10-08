@@ -32,7 +32,6 @@ arthropods_comp <- arthropods %>%
 #7) Unite island, site, transect into a single column with no spaces or punctuation between each part. Call this column uniqueID. We need to keep the original columns too. 
 arthropods <- arthropods %>%
   unite(uniqueID, c(island, site, transect), sep="", remove=F)
-arthropods <- arthropods_test
 view(arthropods)
 #8) Now, make this "wide" dataset into a "long" dataset, with one column for the insect orders, and one column for number of insects. 
 arthropodslong <- arthropods %>%
@@ -44,7 +43,7 @@ arthopodswide <- arthropodslong %>% spread(key = insectorder, value = numberofin
 #Answer: Yes, 'Error: Each row of output must be identified by a unique combination of keys. Do not haev unique ID for all observations, which is problem with raw dataset.
 
 #10) Now, join the "InsectData" with the "CollectionDates" tab on the excel worksheet. You'll need to read it in, and then play around with the various types of 'mutating joins' (i.e. inner_join, left_join, right_join, full_join), to see what each one does to the final dataframe. 
-arthropodcollectiondate <- read_excel("raw/Data_wrangling_day1_pollination.xlsx", sheet = "CollectionDates")
+arthropodcollectiondate <- read_excel("Data_wrangling_day1_pollination.xlsx", sheet = "CollectionDates")
 
 #innerjoin
 innerjoin_arthropod <- arthropodslong %>%
@@ -59,5 +58,6 @@ rightjoin_arthropod <- arthropodslong %>% right_join(arthropodcollectiondate)
 #fulljoin
 fulljoin_arthropod <- arthropodslong %>% full_join(arthropodcollectiondate, by = c("island", "site"))
 
-arthropodslong <- arthropods %>% inner_join(arthropodcollectiondate)
+arthropodslong <- arthropodslong %>% inner_join(arthropodcollectiondate)
+view(arthropodslong)
 write.csv(arthropodslong, file = "arthropods_long_hw.csv")
