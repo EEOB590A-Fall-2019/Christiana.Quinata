@@ -1,22 +1,30 @@
 # EEOB590A
 # Data_wrangling part 2 practice exercise
 # practice tidying and wrangling 
-
+library(readr)
 #from the tidy folder, read in the partialtidy file for pollination from last week's assignment
-
+library(tidyr)
 ###########################################################
 #####Part 1: finish tidying & wrangling dataframe #########
 
 #1) Broad changes to the database
 
 #1a) Change the class of each variable as appropriate (i.e. make things into factors or numeric)
-
+arthropods_untidy <- read_csv("raw/arthropods_long.csv")
+View(arthropods_untidy)
 #2) Fix the errors below within cells 
 
 ##2a) Fix the levels of site so that they have consistent names, all in lowercase
+arthropods_factor()
 
+ite <- c("anao", "race", "riti", "forbi", "marpi", "ladta")
+arthropod_untidy$site <- factor(arthropods_untidy$site, levels =site)
+
+arthropod_untidy <- arthropod_untidy %>% 
+  mutate(site = fct_recode(site, "anao" = "Anao", "forbi" = "ForbiA", "forbi" = "ForbiGrid", "ladta" = "LADTA", "lada" = "LADTG", "ritidian" = "Ritidian", "Racetrack" = "racetrack"))
+view(arthropod_untidy)
 ##2b) What format are the dates in? Do they look okay? 
-
+Yes
 ##2c) Do you see any other errors that should be cleaned up? 
 
 #3) Create a new column for the duration of time traps were out
