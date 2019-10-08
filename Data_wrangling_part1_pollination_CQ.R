@@ -13,7 +13,6 @@ names(arthropods) <- c ("island", "site", "transect", "top color - bowl color", 
 
 labels(arthropods)
 #4) Add missing data. Note that the people who entered the data did not drag down the island or location column to fill every row. 
-arthropods<- data.frame(island = 1:243, island = c(Guam, rep(NA, 243))
 arthroprods <- arthropods %>% fill(island)
 arthroprods <- arthropods %>% fill(island, site)                                               
 colnames(arthropods)                                               
@@ -60,4 +59,4 @@ fulljoin_arthropod <- arthropodslong %>% full_join(arthropodcollectiondate, by =
 
 arthropodslong <- arthropodslong %>% inner_join(arthropodcollectiondate)
 view(arthropodslong)
-write.csv(arthropodslong, file = "arthropods_long_hw.csv")
+write.csv(arthropodslong, file = "arthropods_long.csv")
