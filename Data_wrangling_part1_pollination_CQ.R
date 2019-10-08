@@ -44,7 +44,8 @@ arthopodswide <- arthropodslong %>% spread(key = insectorder, value = numberofin
 #Answer: Yes, 'Error: Each row of output must be identified by a unique combination of keys. Do not haev unique ID for all observations, which is problem with raw dataset.
 
 #10) Now, join the "InsectData" with the "CollectionDates" tab on the excel worksheet. You'll need to read it in, and then play around with the various types of 'mutating joins' (i.e. inner_join, left_join, right_join, full_join), to see what each one does to the final dataframe. 
-arthropodcollectiondate <- read_excel("data/Data_wrangling_day1_pollination.xlsx", sheet = "CollectionDates")
+arthropodcollectiondate <- read_excel("raw/Data_wrangling_day1_pollination.xlsx", sheet = "CollectionDates")
+
 #innerjoin
 innerjoin_arthropod <- arthropodslong %>%
   inner_join(arthropodcollectiondate, by = c("island", "site"))  
@@ -53,7 +54,10 @@ innerjoin_arthropod <- arthropodslong %>%
 leftjoin_arthropod <- arthropodslong %>%
   left_join(arthropodcollectiondate, by = c("island", "site"))  
 #rightjoin
-rightjoin_arthropod <- arthropodslong %>% right_join(arthropodcollectiondate, by = c("island", "site"))
+rightjoin_arthropod <- arthropodslong %>% right_join(arthropodcollectiondate)
 
 #fulljoin
 fulljoin_arthropod <- arthropodslong %>% full_join(arthropodcollectiondate, by = c("island", "site"))
+
+arthropodslong <- arthropods %>% inner_join(arthropodcollectiondate)
+write.csv(arthropodslong, file = "arthropods_long_hw.csv")
