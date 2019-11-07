@@ -75,14 +75,26 @@ traits_count<- traits%>%
 ## It does depend on plant species, looks like there are two plant species that are different. (cynometra, aglaia, aidia, and guamia across islands)
 #Option 1: Create a full model, remove interaction if not significant, but otherwise do not simplify. 
   traitsmod1 <- lm(thickness~island*species, data=traits) 
+  traitsmod2<-lm(thickness~species, data=traits)
+  traitsmod3<-lm(thickness~island, data=traits)
+  traitsmod4<-lm(thickness~site, data=traits)
+  
+  anova(traitsmod1, traitsmod2)  #model 1 not sig better than 2
+  anova(traitsmod2, traitsmod3)  #model 2 not sig better than 3
+  anova(traitsmod3, traitsmod4) #can't run this, because not sub-model - needs to be nested to compare with LRT
+  anova(traitsmod1, webmod_null) #model 3 sig better fit than null model
+  anova(webmod4, webmod_null)
+  
+  
   summary(traitsmod1)
   anova(traitsmod1) 
+  
   ##remove aidia, cynometra, guamia, from all islands. Should we remove rota ochrosia?
   
 #Option 2: Create a full model, remove any non-significant interactions to get final model. 
-
+##
 #Option 3: Create a full model, and all submodels, and compare using Likelihood ratio tests (anova(mod1, mod2)) to choose the best fitting model. 
-
+###lowest residi
 #Option 4: Create a full model and all submodels and compare AIC values to choose the best fitting model
 
 
